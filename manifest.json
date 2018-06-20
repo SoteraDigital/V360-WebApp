@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "V360AppV1",
+  "short_name": "V360AppV1",
+  "description": "",
+  "version": "0.0.1",
+  "minimum_chrome_version": "38",
+  "content_security_policy":"default-src 'unsafe-inline'",
+  "permissions": [
+    "http://*/"
+  ],
+
+  "icons": {
+    "16": "assets/icon_16.png",
+    "128": "assets/icon_128.png"
+  },
+
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  }
+}
