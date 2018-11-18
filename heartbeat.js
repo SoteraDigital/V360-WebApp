@@ -6,7 +6,7 @@ window.setTimeout (function() {
 
 window.setInterval(function(){
 $.ajax({
-    url: "http://192.168.0.1:8888/operation/HTBEAT",
+    url: cameraUrl+"/operation/HTBEAT",
     type: "POST",
     contentType:"application/json",
     data:token

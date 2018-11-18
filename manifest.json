@@ -5,7 +5,7 @@
   "description": "",
   "version": "0.0.1",
   "minimum_chrome_version": "38",
-  "content_security_policy":"default-src 'unsafe-inline'",
+  
   "permissions": [
     "http://*/"
   ],

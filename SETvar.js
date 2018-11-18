@@ -4,6 +4,9 @@
   var VideoLink = "Null";
   var VideoPathWhole= "Null";
   var CameraWeb="192.168.0.1";
+  var ServerPort="8443";
+  var protocol="https://"
+  var cameraUrl = protocol+CameraWeb+":"+ServerPort
   
   
   

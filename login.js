@@ -11,7 +11,7 @@ document.getElementById("login").onclick = function()
   document.querySelector('#greeting4').innerText =
     '    '; 
 $.ajax({
-    url: "http://"+CameraWeb+":8888/auth/login",
+    url: cameraUrl+"/auth/login",
     type: "POST",
     contentType:"application/json",
     data:JSON.stringify({
@@ -32,13 +32,14 @@ document.querySelector('#greeting1').innerText =
 
 window.setInterval(function(){
 $.ajax({
-    url: "http://"+CameraWeb+":8888/operation/HTBEAT",
+    url: cameraUrl+"/operation/HTBEAT",
     type: "POST",
     contentType:"application/json",
     data:token
 })
 .done(function(data, textStatus, jqXHR) {
-    console.log("HTTP Request Succeeded: " + jqXHR.status);
+	
+    console.log("HTTP HTBEAT Request Succeeded: " + jqXHR.status);
     console.log(data);
 
    
