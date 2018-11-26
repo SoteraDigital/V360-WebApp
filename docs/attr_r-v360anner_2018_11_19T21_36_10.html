@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>R-V360anner attribute table</title>
+<link rel=stylesheet type="text/css" href="attr.css" />
+</head>
+
+<body>
+<h1>R-V360anner attribute table</h1><h2>TI Base UUID: {f000<b>xxxx</b>-0451-4000-b0000000000000}. 128 bit UUIDs are typed '<b>bold blue</b>'</h2><table><tbody><tr><th>Handle<br />(hex)</th><th>Handle<br />(dec)</th><th>UUID<br />(hex)</th><th>UUID (descr.)</th><th>Hex value</th><th>GATT Server<br />Permissions</th><th>Description/Value (text)</th></tr>
+<tr class="service"><td>0x1</td><td>1</td><td class="short">0x2800</td><td>GATT Primary Service Declaration</td><td title="UUID: {1800}">00:18</td><td>R</td><td>Generic Access Service</td></tr>
+<tr class="char"><td>0x2</td><td>2</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 3; UUID: {2a00}">02:03:00:00:2A</td><td>R</td><td>Device Name</td></tr>
+<tr class="data"><td>0x3</td><td>3</td><td class="short">0x2A00</td><td>Device Name</td><td title="">56:33:36:30:43:61:6D:65:72:61</td><td>R</td><td>V360Camera</td></tr>
+<tr class="char"><td>0x4</td><td>4</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 5; UUID: {2a01}">02:05:00:01:2A</td><td>R</td><td>Appearance</td></tr>
+<tr class="data"><td>0x5</td><td>5</td><td class="short">0x2A01</td><td>Appearance</td><td title="">00:00</td><td>R</td><td></td></tr>
+<tr class="char"><td>0x6</td><td>6</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 7; UUID: {2a02}">0A:07:00:02:2A</td><td>R</td><td>Peripheral Privacy Flag</td></tr>
+<tr class="data"><td>0x7</td><td>7</td><td class="short">0x2A02</td><td>Peripheral Privacy Flag</td><td title="">00</td><td>RW</td><td></td></tr>
+<tr class="char"><td>0x8</td><td>8</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 9; UUID: {2a03}">08:09:00:03:2A</td><td>R</td><td>Reconnection Address</td></tr>
+<tr class="data"><td>0x9</td><td>9</td><td class="short">0x2A03</td><td>Reconnection Address</td><td title=""></td><td>W</td><td></td></tr>
+<tr class="char"><td>0xA</td><td>10</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 11; UUID: {2a04}">02:0B:00:04:2A</td><td>R</td><td>Peripheral Preferred Connection Parameters</td></tr>
+<tr class="data"><td>0xB</td><td>11</td><td class="short">0x2A04</td><td>Peripheral Preferred Connection Parameters</td><td title="">50:00:A0:00:00:00:E8:03</td><td>R</td><td>P</td></tr>
+<tr class="service"><td>0xC</td><td>12</td><td class="short">0x2800</td><td>GATT Primary Service Declaration</td><td title="UUID: {1801}">01:18</td><td>R</td><td>Generic Attribute Service</td></tr>
+<tr class="char"><td>0xD</td><td>13</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 14; UUID: {2a05}">20:0E:00:05:2A</td><td>R</td><td>Service Changed</td></tr>
+<tr class="data"><td>0xE</td><td>14</td><td class="short">0x2A05</td><td>Service Changed</td><td title=""></td><td>I</td><td></td></tr>
+<tr class="data"><td>0xF</td><td>15</td><td class="short">0x2902</td><td>Client Characteristic Configuration</td><td title="">00:00</td><td>RW</td><td>Write "01:00" to enable notifications, "00:00" to disable</td></tr>
+<tr class="service"><td>0x10</td><td>16</td><td class="short">0x2800</td><td>GATT Primary Service Declaration</td><td title="UUID: {180a}">0A:18</td><td>R</td><td>Device Information Service</td></tr>
+<tr class="char"><td>0x11</td><td>17</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 18; UUID: {2a23}">02:12:00:23:2A</td><td>R</td><td>System ID</td></tr>
+<tr class="data"><td>0x12</td><td>18</td><td class="short">0x2A23</td><td>System ID</td><td title="">2F:ED:4B:00:00:4C:99:B4</td><td>R</td><td>/KL</td></tr>
+<tr class="char"><td>0x13</td><td>19</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 20; UUID: {2a24}">02:14:00:24:2A</td><td>R</td><td>Model Number String</td></tr>
+<tr class="data"><td>0x14</td><td>20</td><td class="short">0x2A24</td><td>Model Number String</td><td title="">56:53:4E:56:33:36:30</td><td>R</td><td>VSNV360</td></tr>
+<tr class="char"><td>0x15</td><td>21</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 22; UUID: {2a25}">02:16:00:25:2A</td><td>R</td><td>Serial Number String</td></tr>
+<tr class="data"><td>0x16</td><td>22</td><td class="short">0x2A25</td><td>Serial Number String</td><td title="">54:31:56:44:43:31:37:30:30:43:59:55</td><td>R</td><td>T1VDC1700CYU</td></tr>
+<tr class="char"><td>0x17</td><td>23</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 24; UUID: {2a26}">02:18:00:26:2A</td><td>R</td><td>Firmware Revision String</td></tr>
+<tr class="data"><td>0x18</td><td>24</td><td class="short">0x2A26</td><td>Firmware Revision String</td><td title="">44:42:2D:44:30:30:2E:32:33</td><td>R</td><td>DB-D00.23</td></tr>
+<tr class="char"><td>0x19</td><td>25</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 26; UUID: {2a27}">02:1A:00:27:2A</td><td>R</td><td>Hardware Revision String</td></tr>
+<tr class="data"><td>0x1A</td><td>26</td><td class="short">0x2A27</td><td>Hardware Revision String</td><td title="">43:43:32:35:34:30:2D:32:32:2D:32:35:36:2D:38</td><td>R</td><td>CC2540-22-256-8</td></tr>
+<tr class="char"><td>0x1B</td><td>27</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 28; UUID: {2a28}">02:1C:00:28:2A</td><td>R</td><td>Software Revision String</td></tr>
+<tr class="data"><td>0x1C</td><td>28</td><td class="short">0x2A28</td><td>Software Revision String</td><td title="">56:33:36:30:2D:44:42:2D:44:30:30:2E:32:33</td><td>R</td><td>V360-DB-D00.23</td></tr>
+<tr class="char"><td>0x1D</td><td>29</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 30; UUID: {2a29}">02:1E:00:29:2A</td><td>R</td><td>Manufacturer Name String</td></tr>
+<tr class="data"><td>0x1E</td><td>30</td><td class="short">0x2A29</td><td>Manufacturer Name String</td><td title="">48:69:2D:50</td><td>R</td><td>Hi-P</td></tr>
+<tr class="char"><td>0x1F</td><td>31</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 32; UUID: {2a2a}">02:20:00:2A:2A</td><td>R</td><td>IEEE 11073-20601 Regulatory Certification Data List</td></tr>
+<tr class="data"><td>0x20</td><td>32</td><td class="short">0x2A2A</td><td>IEEE 11073-20601 Regulatory Certification Data List</td><td title="">FE:00:65:78:70:65:72:69:6D:65:6E:74:61:6C</td><td>R</td><td>experimental</td></tr>
+<tr class="char"><td>0x21</td><td>33</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 34; UUID: {2a50}">02:22:00:50:2A</td><td>R</td><td>PnP ID</td></tr>
+<tr class="data"><td>0x22</td><td>34</td><td class="short">0x2A50</td><td>PnP ID</td><td title="">01:F7:00:02:00:01:00</td><td>R</td><td></td></tr>
+<tr class="service"><td>0x23</td><td>35</td><td class="short">0x2800</td><td>GATT Primary Service Declaration</td><td title="UUID: {f000ffe0-0123-4000-b000000000000000}">00:00:00:00:00:00:00:B0:00:40:23:01:E0:FF:00:F0</td><td>R</td><td>Simple Keys Service</td></tr>
+<tr class="char"><td>0x24</td><td>36</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 37; UUID: {f000ffe1-0123-4000-b000000000000000}">08:25:00:00:00:00:00:00:00:00:B0:00:40:23:01:E1:FF:00:F0</td><td>R</td><td>Key press state</td></tr>
+<tr class="data"><td>0x25</td><td>37</td><td class="long">0xFFE1</td><td>Key press state</td><td title=""></td><td>W</td><td></td></tr>
+<tr class="data"><td>0x26</td><td>38</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">42:75:74:74:6F:6E:20:50:72:65:73:73:20:53:74:61:74:65</td><td>R</td><td>Button Press State</td></tr>
+<tr class="char"><td>0x27</td><td>39</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 40; UUID: {f000fff1-0123-4000-b000000000000000}">10:28:00:00:00:00:00:00:00:00:B0:00:40:23:01:F1:FF:00:F0</td><td>R</td><td>Simple Profile Characteristic 1</td></tr>
+<tr class="data"><td>0x28</td><td>40</td><td class="long">0xFFF1</td><td>Simple Profile Characteristic 1</td><td title=""></td><td>N</td><td></td></tr>
+<tr class="data"><td>0x29</td><td>41</td><td class="short">0x2902</td><td>Client Characteristic Configuration</td><td title="">00:00</td><td>RW</td><td>Write "01:00" to enable notifications, "00:00" to disable</td></tr>
+<tr class="data"><td>0x2A</td><td>42</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">4C:45:44</td><td>R</td><td>LED</td></tr>
+<tr class="service"><td>0x2B</td><td>43</td><td class="short">0x2800</td><td>GATT Primary Service Declaration</td><td title="UUID: {f000ff70-0123-4000-b000000000000000}">00:00:00:00:00:00:00:B0:00:40:23:01:70:FF:00:F0</td><td>R</td><td></td></tr>
+<tr class="char"><td>0x2C</td><td>44</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 45; UUID: {f000ff89-0123-4000-b000000000000000}">08:2D:00:00:00:00:00:00:00:00:B0:00:40:23:01:89:FF:00:F0</td><td>R</td><td></td></tr>
+<tr class="data"><td>0x2D</td><td>45</td><td class="long">0xFF89</td><td></td><td title=""></td><td>W</td><td></td></tr>
+<tr class="data"><td>0x2E</td><td>46</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">41:50:50:42:55:54</td><td>R</td><td>APPBUT</td></tr>
+<tr class="char"><td>0x2F</td><td>47</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 48; UUID: {f000ffa1-0123-4000-b000000000000000}">08:30:00:00:00:00:00:00:00:00:B0:00:40:23:01:A1:FF:00:F0</td><td>R</td><td>Accererometer enable</td></tr>
+<tr class="data"><td>0x30</td><td>48</td><td class="long">0xFFA1</td><td>Accererometer enable</td><td title=""></td><td>W</td><td>Write "01" to enable, "00" to disable</td></tr>
+<tr class="data"><td>0x31</td><td>49</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">41:50:50:20:41:53:20:52:65:71</td><td>R</td><td>APP AS Req</td></tr>
+<tr class="char"><td>0x32</td><td>50</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 51; UUID: {f000ffa2-0123-4000-b000000000000000}">10:33:00:00:00:00:00:00:00:00:B0:00:40:23:01:A2:FF:00:F0</td><td>R</td><td>Accelerometer range</td></tr>
+<tr class="data"><td>0x33</td><td>51</td><td class="long">0xFFA2</td><td>Accelerometer range</td><td title=""></td><td>N</td><td>Range: 20=2G, 80=8G</td></tr>
+<tr class="data"><td>0x34</td><td>52</td><td class="short">0x2902</td><td>Client Characteristic Configuration</td><td title="">00:00</td><td>RW</td><td>Write "01:00" to enable notifications, "00:00" to disable</td></tr>
+<tr class="data"><td>0x35</td><td>53</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">41:50:50:20:41:53:20:52:65:73</td><td>R</td><td>APP AS Res</td></tr>
+<tr class="char"><td>0x36</td><td>54</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 55; UUID: {f000ffa3-0123-4000-b000000000000000}">08:37:00:00:00:00:00:00:00:00:B0:00:40:23:01:A3:FF:00:F0</td><td>R</td><td>Accelerometer X-coordinate</td></tr>
+<tr class="data"><td>0x37</td><td>55</td><td class="long">0xFFA3</td><td>Accelerometer X-coordinate</td><td title=""></td><td>W</td><td></td></tr>
+<tr class="data"><td>0x38</td><td>56</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">52:43:20:41:53:20:52:65:71</td><td>R</td><td>RC AS Req</td></tr>
+<tr class="char"><td>0x39</td><td>57</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 58; UUID: {f000ffa4-0123-4000-b000000000000000}">10:3A:00:00:00:00:00:00:00:00:B0:00:40:23:01:A4:FF:00:F0</td><td>R</td><td>Accelerometer Y-coordinate</td></tr>
+<tr class="data"><td>0x3A</td><td>58</td><td class="long">0xFFA4</td><td>Accelerometer Y-coordinate</td><td title=""></td><td>N</td><td></td></tr>
+<tr class="data"><td>0x3B</td><td>59</td><td class="short">0x2902</td><td>Client Characteristic Configuration</td><td title="">00:00</td><td>RW</td><td>Write "01:00" to enable notifications, "00:00" to disable</td></tr>
+<tr class="data"><td>0x3C</td><td>60</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">52:43:20:41:53:20:52:65:73</td><td>R</td><td>RC AS Res</td></tr>
+<tr class="char"><td>0x3D</td><td>61</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 62; UUID: {f000ffa9-0123-4000-b000000000000000}">10:3E:00:00:00:00:00:00:00:00:B0:00:40:23:01:A9:FF:00:F0</td><td>R</td><td></td></tr>
+<tr class="data"><td>0x3E</td><td>62</td><td class="long">0xFFA9</td><td></td><td title=""></td><td>N</td><td></td></tr>
+<tr class="data"><td>0x3F</td><td>63</td><td class="short">0x2902</td><td>Client Characteristic Configuration</td><td title="">00:00</td><td>RW</td><td>Write "01:00" to enable notifications, "00:00" to disable</td></tr>
+<tr class="data"><td>0x40</td><td>64</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">52:43:20:44:41:53:20:53:74:61:72:74</td><td>R</td><td>RC DAS Start</td></tr>
+<tr class="char"><td>0x41</td><td>65</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 66; UUID: {f000ffaa-0123-4000-b000000000000000}">10:42:00:00:00:00:00:00:00:00:B0:00:40:23:01:AA:FF:00:F0</td><td>R</td><td></td></tr>
+<tr class="data"><td>0x42</td><td>66</td><td class="long">0xFFAA</td><td></td><td title=""></td><td>N</td><td></td></tr>
+<tr class="data"><td>0x43</td><td>67</td><td class="short">0x2902</td><td>Client Characteristic Configuration</td><td title="">00:00</td><td>RW</td><td>Write "01:00" to enable notifications, "00:00" to disable</td></tr>
+<tr class="data"><td>0x44</td><td>68</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">52:43:20:44:41:53:20:43:6F:6E:66:69:72:6D</td><td>R</td><td>RC DAS Confirm</td></tr>
+<tr class="char"><td>0x45</td><td>69</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 70; UUID: {f000ffab-0123-4000-b000000000000000}">08:46:00:00:00:00:00:00:00:00:B0:00:40:23:01:AB:FF:00:F0</td><td>R</td><td></td></tr>
+<tr class="data"><td>0x46</td><td>70</td><td class="long">0xFFAB</td><td></td><td title=""></td><td>W</td><td></td></tr>
+<tr class="data"><td>0x47</td><td>71</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">52:43:20:44:41:53:20:52:65:73:75:6C:74</td><td>R</td><td>RC DAS Result</td></tr>
+<tr class="char"><td>0x48</td><td>72</td><td class="short">0x2803</td><td>GATT Characteristic Declaration</td><td title="Handle: 73; UUID: {f000ffb2-0123-4000-b000000000000000}">08:49:00:00:00:00:00:00:00:00:B0:00:40:23:01:B2:FF:00:F0</td><td>R</td><td>Light Green Data</td></tr>
+<tr class="data"><td>0x49</td><td>73</td><td class="long">0xFFB2</td><td>Light Green Data</td><td title=""></td><td>W</td><td>1 byte (0 .. FF)</td></tr>
+<tr class="data"><td>0x4A</td><td>74</td><td class="short">0x2901</td><td>Characteristic User Description</td><td title="">4F:41:44:20:4D:6F:64:65</td><td>R</td><td>OAD Mode</td></tr>
+</body></html>

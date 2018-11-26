@@ -1,4 +1,11 @@
 // My API (POST http://192.168.0.1:8888/auth/login)
+//connect to camera
+//pin from ascii to byte/hex padded to 12 ?
+//write to ffA1 30:30:30:30:00:00:00:00:00:00:00:00
+//listen on ffa2 for 0x1 
+//there is a call to receive the serial / mac of the bluetooth of apq
+//Write to APPBUT 0xFF89 0x00 0x01 to turn on
+//second device will show up
 document.getElementById("login").onclick = function()
 {
   

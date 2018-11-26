@@ -8,10 +8,12 @@
 <head>
   <title>V360test.js</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="SETvar.js"></script>
+ <SCRIPT SRC="jquery-2.1.3.min.js"></SCRIPT>
 </head>
- <script src="SETvar.js"></script>
- <SCRIPT SRC="jquery-2.1.3.min.js">
-</SCRIPT>
+ 
+<body >
+
 <br>
 <br>
 
@@ -22,19 +24,24 @@ Please Connect the Computer WiFi to the Camera Wifi Access Point
 <br>
 <br>
 
-
+<div>
+<h3>Find bluetooth devices<h3>
+<input id="bluetoothStartScan" type="submit" value="startscan" >
+<ul>
+</ul>
+</div>
 Submit only if a change is required:
 <br>
 <br>
-<button id="datachange" type="button">
+<div >
 Camera Web Address:<br>
 <input id="webaddress" type="text" name="webaddress" value="192.168.0.1">
 <br>
 Camera Pin:<br>
 <input id="camerapin" type="text" name="camerapin" value="0000">
 <br>
-<input type="submit" value="Change">
-</button> 
+<input id="datachange"  type="submit" value="Change">
+</div> 
 
 
 <br>
@@ -48,8 +55,6 @@ Then:
 
 <button id="start" type="button">Start Stream</button>
 
-
-<body>
 
  <br>
   <br>
