@@ -1,79 +1,69 @@
 <!DOCTYPE html>
-
-
 <html>
-  
-  
-  
-<head>
-  <title>V360test.js</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="SETvar.js"></script>
- <SCRIPT SRC="jquery-2.1.3.min.js"></SCRIPT>
-</head>
+  <head>
+    <title>V360test.js</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="SETvar.js"></script>
+  <SCRIPT SRC="jquery-2.1.3.min.js"></SCRIPT>
+  </head>
  
-<body >
-
-<br>
-<br>
-
-Please Connect the Computer WiFi to the Camera Wifi Access Point
-<br>
-<br>
-<br>
-<br>
-<br>
-
+  <body >
 <div>
-<h3>Find bluetooth devices<h3>
-<input id="bluetoothStartScan" type="submit" value="startscan" >
-<ul>
-</ul>
-</div>
-Submit only if a change is required:
-<br>
-<br>
-<div >
-Camera Web Address:<br>
-<input id="webaddress" type="text" name="webaddress" value="192.168.0.1">
-<br>
-Camera Pin:<br>
-<input id="camerapin" type="text" name="camerapin" value="0000">
-<br>
-<input id="datachange"  type="submit" value="Change">
-</div> 
-
-
-<br>
-<br>
-First:
-<br>
-<button id="login" type="button">Connect to Camera</button>
-<br>
-Then:
-<br>
-
-<button id="start" type="button">Start Stream</button>
-
-
- <br>
-  <br>
-  <br>
-  <p1 id="greeting1"></p1>
-  <br>
-  <br>
-  <p2 id="greeting2"></p2>
-  <br>
-  <br>
-  <p3 id="greeting3"></p3>
-  <br>
-  <br>
-  <p4 id="greeting4"></p4>
-  <br>
-  <script src="Updatedata.js"></script>
-  <script src="login.js"></script>
-  <script src="startstream.js"></script>
+  <div>
+  This application will provide you with a url/m3u8 file to load on your favorite application.
+  We recommend using VLC player or you can also open the link provided once streaming starts in safari.
+  Or any application that supports the HLS (HTTP Live Streaming)
+  'Please Note: Browser Must Support HLS (e.g. Safari) or open with VLC by selecting open streaming https://www.videolan.org/vlc/index.html';
+  </div>
+  wikipedia also contains a list of other compatible players and web browsers that support HLS
+  https://en.wikipedia.org/wiki/HTTP_Live_Streaming#Supported_players_and_servers
+  Please Connect the Computer WiFi to the Camera Wifi Access Point
   
+  <div>
+  <h3>Find bluetooth devices<h3>
+  
+  <ul>
+    <li>
+        <input id="bluetoothStartScan" type="submit" value="start ble scan" >
+    </li>
+    <li>
+      <input id="bluetoothCameraStartScan" type="submit" value="start cam scan" >
+    </li>
+  </ul>
+  </div>
+  Submit only if a change is required:
+  <div >
+  Camera Web Address:<br>
+  <input id="webaddress" type="text" name="webaddress" value="192.168.0.1">
+  Camera Pin:<br>
+  <input id="camerapin" type="text" name="camerapin" value="0000">
+  <input id="datachange"  type="submit" value="Change">
+  </div> 
 
-</body>
+
+  First:
+  <br>
+  <button id="login" type="button">Connect to Camera</button>
+  Then:
+  <br>
+
+  <button id="start" type="button">Start Stream</button>
+
+<br/>
+    <ul id="greeting1">
+      
+    </ul>
+    <br>
+    <p2 id="greeting2"></p2>
+    <br>
+    <p3 id="greeting3"></p3>
+    <br>
+    <p4 id="greeting4"></p4>
+    <br>
+    <script src="Updatedata.js"></script>
+    <script src="login.js"></script>
+    <script src="startstream.js"></script>
+    
+  </div>
+  </body>
 </html>

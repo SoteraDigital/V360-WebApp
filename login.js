@@ -4,7 +4,14 @@
 //write to ffA1 30:30:30:30:00:00:00:00:00:00:00:00
 //listen on ffa2 for 0x1 
 //there is a call to receive the serial / mac of the bluetooth of apq
-//Write to APPBUT 0xFF89 0x00 0x01 to turn on
+ // power on apq: APPBUT 0xFF89 0x00 0x01 (power button on)
+    // wait for apq powered on -> done connect to APQ
+   /* uint8_t button = 0x00;
+    uint8_t on = 0x01;
+    [data appendBytes:&button length:1];
+    [data appendBytes:&on length:1];
+//    NSData* data = [NSData dataWithBytes:&powerOn length:2];
+    [self.connectedPeripheral writeValue:data forCharacteristic:self.association.camera_button type:CBCharacteristicWriteWithResponse];*/
 //second device will show up
 document.getElementById("login").onclick = function()
 {
