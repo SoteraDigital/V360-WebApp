@@ -1,4 +1,5 @@
 # V360-ChromeApp
+<<<<<<< HEAD
 added a node.js application (server.js) which will start two web servers.
 
 "http://localhost:8059"
@@ -8,3 +9,6 @@ Will point to the web dashboard application which handles bluetooth transactions
 The http://localhost:8503 is a http proxy used to forward network request to the camera while bypassing CORS restrictions on web browsers.
 
 If ports require changes they can be updated on servers.js and setvars.js
+=======
+This was originally made as a chrome application.
+>>>>>>> 2fa40702fb6d47aaae8fd2464c9b6ccdcf845e6f
