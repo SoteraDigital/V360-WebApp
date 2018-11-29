@@ -1,5 +1,6 @@
 
 var greeting1 = document.querySelector('#greeting1');
+var reverseTetheringButton = document.getElementById("reverseTethering");
 var bluetoothDaugtherBoardDevice;
 const decoder = new TextDecoder('UTF-8');
 function log(msg)
@@ -27,6 +28,23 @@ function handleNotifications(event)
 	let value = event.target.value;
 	let a = dataViewToArray(value);
 	log("Characteritic notification:"+event.target.uuid +" value: "+a.join(' '));
+	if(event.target.uuid == '0000ffb4-0000-1000-8000-00805f9b34fb')
+	{
+		var resp = value.getUint8(0);
+		switch(resp)
+		{
+			case 0x0:
+				log("logged into the camera");
+				camera_connection.RetrieveData();
+				break;
+			case 0x1:
+				log("login denied try different pin or reset");
+				break;
+			case 0x2:
+				log("home user already logged in");
+				break;
+		}
+	}
 }
 var SCAM1_service_uuid = 0xff00;
 var SCAM2_service_uuid = 0xff70;
@@ -102,21 +120,88 @@ async function login(service,pin,pin_notify_char,pin_char,user_pin)
 
 }
 
-async function getData(service,title,chare)
+async function getData(service,title,chare,print)
 {
 	let wifi_config_char = await service.getCharacteristic(chare);
 	return await wifi_config_char.readValue()
 	.then(value => 
 	{
-		log(title+":"+ dataViewToArray(value));
+		if(print)
+		{
+			log(title+":"+ dataViewToArray(value));
+		}
 		return value;
 	});
 }
+async function writeData(service,title,chare,data)
+{
+	let wifi_config_char = await service.getCharacteristic(chare);
+	return await wifi_config_char.writeValue(data)
+	.then(_ => 
+	{
+		log("wrote "+title+":"+data );
+	});
+}
+class CameraInfo
+{
+	constructor(apq,db)
+	{
+		this.apq_services = apq;
+		this.db_service = db;
+	}
+	async login()
+	{
+		log('Logging in to Camera');
+		await loginApq(db_service,"0000");
+	}
+	async RetrieveData()
+	{
+		log('Getting Camera services');
+		reverseTetheringButton.hidden = false;
+		try{
+			await getData(this.apq_services,"usb mode mode",0xff0b,true);
+		}catch(e)
+		{
+			log("cannot read usb mode:"+ e);
+		}
+		//
+		await getData(this.db_service,"camera capture mode",0xff80,true);
+		
+		let camera_info_data = await getData(this.apq_services,"camera information",0xff43,true);
+		let camera_info = createCameraInformationStruct(camera_info_data);
+		logData("Camera information",camera_info);
+
+		let camera_name = await getData(this.apq_services,"camera name",0xff06,false);
+		log("Camera Name"+decoder.decode(camera_name));
+		
+		let wifi_info_data = await getData(this.apq_services,"current wifi info",0xff42,false);
+		let wifi_info = createCurrentWifiInformationStruct(wifi_info_data);
+		document.getElementById("webaddress").value = wifi_info["ipaddress"];
+		logData("current wifi info",wifi_info);
+		
+		let wifi_config_data = await getData(this.apq_services,"wifi config",0xff30,false);
+		let wifi_config = createCurrentWifiConfigurationStruct(wifi_config_data);
+		logData("wifi config",wifi_config);
+		
+		let ap_config_data = await getData(this.apq_services,"access point config",0xff31,false);
+		let ap_config = createApConfigurationStruct(ap_config_data);
+		logData("access point config",ap_config);
+	}
+	async usb_tethering(value)
+	{
+		await writeData(this.apq_services,"usb mode",0xff0b,Uint8Array.of(value));
+	}
+}
+reverseTetheringButton.onclick = async function()
+{
+	camera_connection.usb_tethering(0x2);
+};
+var camera_connection = null;
+
 document.getElementById("bluetoothCameraStartScan").onclick = async function()
 {
 	//try{
 		bluetoothCameraStartScan = await navigator.bluetooth.requestDevice({
-			//	acceptAllDevices: true
 				filters: [{
 					services: [
 								SCAM1_service_uuid,
@@ -138,47 +223,60 @@ document.getElementById("bluetoothCameraStartScan").onclick = async function()
 			log("found a Camera device:"+bluetoothCameraStartScan);
 			const server = await bluetoothCameraStartScan.gatt.connect();
 			
-			const db_service = await server.getPrimaryService(0xff70);
+			db_service = await server.getPrimaryService(0xff70);
 			var db_chars = await db_service.getCharacteristics();
 			
-			const apq_services = await getFF00_Service(server);
-			var apq_chars = await apq_services.getCharacteristics();
+			let apq_services = await getFF00_Service(server);
+			var apq_chars = apq_services.getCharacteristics();
 			
 			if(!db_service || !apq_services)
 			{
 				return;
 			}
-			log('Logging in to Camera');
-			await loginApq(db_service,"0000");
-			//await displayDeviceInformation(server);
-			//lets now get our service
-			log('Getting Camera services');
-			
-			try{
-				await getData(apq_services,"usb mode mode",0xff0b);
-			}catch(e)
-			{
-				log("cannot read usb mode:"+ e);
-			}
-			//
-			await getData(db_service,"camera mode",0xff80);
-			await getData(apq_services,"camera information",0xff43);
-			await getData(apq_services,"camera information",0xff06);
-			let wifi_info_data = await getData(apq_services,"current wifi info",0xff42);
-			let wifi_info = createCurrentWifiInformationStruct(wifi_info_data);
-			document.getElementById("webaddress").value = wifi_info["ipaddress:"];
-			logData(wifi_info);
-			await getData(apq_services,"wifi config",0xff30);
-			await getData(apq_services,"access point config",0xff31);
-			
+			camera_connection = new CameraInfo(apq_services,db_service)
+			await camera_connection.login();
 	//}catch(e)
 	{
 		//log(e);
 	}
 };
-function logData(data)
+function logData(title,data)
 {
-	log(JSON.stringify(data,null,2));
+	log(title+":"+JSON.stringify(data,null,2));
+}
+function createApConfigurationStruct(dataview)
+{
+	let buffer = dataview.buffer;
+	let tmp = {
+		"camera-ap-ssid":decoder.decode(buffer.slice(0,31)),
+		"security-type":dataview.getUint8(32),
+		"channel": dataview.getUint8(33)
+	};
+	return tmp;
+}
+function createCurrentWifiConfigurationStruct(dataview)
+{
+	let buffer = dataview.buffer;
+	let type_str = "";
+	switch(dataview.getUint8(0))
+	{
+		case 0x0:
+		type_str = "no wifi";
+		break;
+		case 0x1:
+		type_str = "wifi ap";
+		
+		break;
+		case 0x2:
+		type_str = "wifi station";
+	
+		break;
+	}
+	let tmp = {
+		"wifi-connection-type":type_str
+	};
+
+	return tmp;
 }
 function createCurrentWifiInformationStruct(dataview)
 {
@@ -186,17 +284,21 @@ function createCurrentWifiInformationStruct(dataview)
 	let tmp = {
 		"wifi-connection-type":dataview.getUint8(0),
 		"wifi-ssid":decoder.decode(buffer.slice(1,32)),
-		"ipaddress:": dataview.getUint8(33)
+		"ipaddress": dataview.getUint8(33)
 		+"."+dataview.getUint8(34)
 		+"."+dataview.getUint8(35)
 		+"."+dataview.getUint8(36)
 	};
-
 	return tmp;
 }
-function createCameraInformationStruct(buffer)
+function createCameraInformationStruct(dataview)
 {
-	let tmp = {};
+	let buffer = dataview.buffer;
+	let tmp = {
+		"fw":decoder.decode(buffer.slice(0,23)),
+		"serial": decoder.decode(buffer.slice(24,34)),
+		"camera": decoder.decode(buffer.slice(35,46))
+	};
 	return tmp;
 }
 document.getElementById("bluetoothStartScan").onclick = async function()
