@@ -15,84 +15,79 @@
 //second device will show up
 document.getElementById("login").onclick = function()
 {
+    updateValues();
+    log('Trying to connect....'); 
+    document.querySelector('#greeting2').innerText = '  '; 
+    document.querySelector('#greeting3').innerText = '   '; 
+    document.querySelector('#greeting4').innerText = '   '; 
   
-  document.querySelector('#greeting1').innerText =
-    'Trying to connect....'; 
-  document.querySelector('#greeting2').innerText =
-    '  '; 
-  document.querySelector('#greeting3').innerText =
-    '   '; 
-  document.querySelector('#greeting4').innerText =
-    '    '; 
-$.ajax({
-    url: cameraUrl+"/auth/login",
-    type: "POST",
-    contentType:"application/json",
-    data:JSON.stringify({
-        "psw": pin
+    $.ajax({
+        url: proxy_url_port+"/status/CAMINF",
+        headers:{
+            'Target-Proxy':"http://"+document.getElementById("webaddress").value
+        },
+        type: "GET",
+        contentType:"application/json",
+    }).done(function(data, textStatus, jqXHR) {
+        log(data);
+    });
+
+    
+    $.ajax({
+        url: proxy_url_port+"/auth/login",
+        headers:{
+            'Target-Proxy':"http://"+document.getElementById("webaddress").value
+        },
+        type: "POST",
+        contentType:"application/json",
+        data:JSON.stringify({
+            "psw": pin
+        })
     })
-})
-.done(function(data, textStatus, jqXHR) {
-    console.log("HTTP Request Succeeded: " + jqXHR.status);
-    console.log(data);
-    token = (JSON.stringify(data));
-document.querySelector('#greeting1').innerText =
-    'Connection Success!  '+token; 
-    
-    
-    
-    window.setTimeout (function() {
-  
-
-window.setInterval(function(){
-$.ajax({
-    url: cameraUrl+"/operation/HTBEAT",
-    type: "POST",
-    contentType:"application/json",
-    data:token
-})
-.done(function(data, textStatus, jqXHR) {
-	
-    console.log("HTTP HTBEAT Request Succeeded: " + jqXHR.status);
-    console.log(data);
-
-   
-    
-})
-.fail(function(jqXHR, textStatus, errorThrown) {
-    console.log("HTTP Request Failed");
-})
-.always(function() {
-  console.log("HTTP Request always");
-  
-});
-    /* ... */
-}, 500);
-  
-  
-}, 1000);
-
-    
-    
-    
-    
-    
-    
-    
-})
-.fail(function(jqXHR, textStatus, errorThrown) {
-    console.log("HTTP Request Failed");
-    console.log(CameraWeb);
-   document.querySelector('#greeting1').innerText =
-    'Connection Failed, Plase Make Sure Computer is on Camera WiFi and Try Again'; 
-   
-})
-.always(function() {
-  console.log("HTTP Request always");
-    /* ... */
-});
-
+    .done(function(data, textStatus, jqXHR) 
+    {
+        console.log("auth/login HTTP Request Succeeded: " + jqXHR.status);
+        token = (JSON.stringify(data));
+        document.querySelector('#token_input').value = token;
+        document.querySelector('#greeting1').innerText = 'Connection Success!  '+token; 
+        startHeartbeat();
+    }).fail(function(jqXHR, textStatus, errorThrown) 
+    {
+        log('auth/login Connection Failed, Plase Make Sure Computer is on Camera WiFi and Try Again');
+    });
 };
-
+function startHeartbeat()
+{
+    token = document.querySelector('#token_input').value;
+    window.setTimeout (function() 
+    {  
+       let hbeat_handle =  window.setInterval(function()
+        {
+            $.ajax({
+                url: proxy_url_port+"/operation/HTBEAT",
+                headers:{
+                    'Target-Proxy':"http://"+document.getElementById("webaddress").value
+                },
+                type: "POST",
+                contentType:"application/json",
+                data:token
+            }).done(function(data, textStatus, jqXHR) 
+            {
+                //  console.log("HTTP HTBEAT Request Succeeded: " + jqXHR.status);
+                //   console.log(data);
+            }).fail(function(jqXHR, textStatus, errorThrown)
+            {
+                if(jqXHR.status == 401)
+                {
+                    log("Token is invalid login again. token used:"+token);
+                    window.clearInterval(hbeat_handle);
+                }else{
+                    log("HTTP HTBEAT Request Failed");
+                }
+            });
+        }, 500);
+    
+    }, 1000);
+}
 
 

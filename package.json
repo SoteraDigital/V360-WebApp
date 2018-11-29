@@ -1,0 +1,31 @@
+{
+  "name": "v360appv1",
+  "version": "1.0.0",
+  "description": "Node JS v360 proxy server and webbluetooth server",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "async": "^2.6.1",
+    "cross-spawn": "^6.0.5",
+    "express": "^4.16.4",
+    "fs": "^0.0.1-security",
+    "http-proxy": "^1.17.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@gitlab.hvsn.io:2224/vsnmobil/v360-chromeapp.git"
+  },
+  "keywords": [
+    "bluetooth",
+    "v360"
+  ],
+  "author": "Hoyos Integrity, Inc",
+  "license": "MIT"
+}

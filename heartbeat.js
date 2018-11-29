@@ -6,7 +6,10 @@ window.setTimeout (function() {
 
 window.setInterval(function(){
 $.ajax({
-    url: cameraUrl+"/operation/HTBEAT",
+    url: proxy_url_port+"/operation/HTBEAT",
+    headers:{
+        'Target-Proxy':"http://"+document.getElementById("webaddress").value
+    },
     type: "POST",
     contentType:"application/json",
     data:token

@@ -1,69 +1,90 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>V360test.js</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="SETvar.js"></script>
+<html lang="en">
+<head>
+  <title>V360test.js</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="SETvar.js"></script>
   <SCRIPT SRC="jquery-2.1.3.min.js"></SCRIPT>
-  </head>
- 
-  <body >
-<div>
+</head>
+
+<body>
   <div>
-  This application will provide you with a url/m3u8 file to load on your favorite application.
-  We recommend using VLC player or you can also open the link provided once streaming starts in safari.
-  Or any application that supports the HLS (HTTP Live Streaming)
-  'Please Note: Browser Must Support HLS (e.g. Safari) or open with VLC by selecting open streaming https://www.videolan.org/vlc/index.html';
-  </div>
-  wikipedia also contains a list of other compatible players and web browsers that support HLS
-  https://en.wikipedia.org/wiki/HTTP_Live_Streaming#Supported_players_and_servers
-  Please Connect the Computer WiFi to the Camera Wifi Access Point
-  
-  <div>
-  <h3>Find bluetooth devices<h3>
-  
-  <ul>
-    <li>
-        <input id="bluetoothStartScan" type="submit" value="start ble scan" >
-    </li>
-    <li>
-      <input id="bluetoothCameraStartScan" type="submit" value="start cam scan" >
-    </li>
-  </ul>
-  </div>
-  Submit only if a change is required:
-  <div >
-  Camera Web Address:<br>
-  <input id="webaddress" type="text" name="webaddress" value="192.168.0.1">
-  Camera Pin:<br>
-  <input id="camerapin" type="text" name="camerapin" value="0000">
-  <input id="datachange"  type="submit" value="Change">
-  </div> 
+    <div>
+      This application will provide you with a url/m3u8 file to load on your favorite application.<br>
+      We recommend using <a href="https://www.videolan.org/vlc/index.html">VLC player</a> or you can also open the link
+      provided once streaming starts in safari.<br>
 
+      Or any application that supports the HLS (HTTP Live Streaming)
+      'Please Note: Browser Must Support HLS (e.g. Safari) or open with VLC by selecting open streaming '
+    </div>
+    <br>
+    wikipedia also contains a list of other compatible players and web browsers that support HLS
+    <a href="https://en.wikipedia.org/wiki/HTTP_Live_Streaming#Supported_players_and_servers"> wikipedia HTTP
+      Streaming Supported Players and Servers</a>
+    <br>
+      <p>
+        if you have adb access you can use this command to retrieve the camera processor bluetooth address<br>
+        adb shell settings get secure bluetooth_address
+      </p>
+    <div>
+      <h3>Find bluetooth devices</h3>
 
-  First:
-  <br>
-  <button id="login" type="button">Connect to Camera</button>
-  Then:
-  <br>
+      <ul>
+        <li>
+          <b>Step 1: Turn on the camera thru bluetooth DaugtherBoard</b>
+        </li>
+        <li>
+          <input id="bluetoothStartScan" type="submit" value="Turn on thru DaugtherBoard bluetooth">
+        </li>
+        <li>
+          <b>Step 2: Connect to the camera main Processor bluetooth </b>
+        </li>
+        <li>
+          <input id="bluetoothCameraStartScan" type="submit" value="Connect to the Camera Main processor">
+        </li>
+        <li>
+          <b>Step 3:Connect to the camera WIFI / network access point</b>
+          <p>If you want the camera to connect to a wireless network at your home or office. <br>
+            Please use the mobile app for now to configure it.</p>
+        </li>
+        <li>
+          <b>Step 4:(if required)</b><br>
+          Submit only if a change is required:
+          <div>
+            Camera IP Address default when the camera acts as as accesspoint is 192.168.0.1:
+            <input id="webaddress" type="text" name="webaddress" value="192.168.0.1"><br>
+            Camera Pin(defaults is 0000):
+            <input id="camerapin" type="text" name="camerapin" value="0000">
+           
+          </div>
+        </li>
+        <li>
+          <b>Step 5: login with above information to retrieve a token</b><br>
+          <button id="login" type="button">Connect/Login to Camera</button>
+          <input id="token_input" type="text" name="token_field" value="">
+        </li>
+        <li>
+          <b>Step 6:start the video server previewing</b><br>
+          <button id="start" type="button">Start preview Streaming</button>
+        </li>
 
-  <button id="start" type="button">Start Stream</button>
+      </ul>
+    </div>
 
-<br/>
     <ul id="greeting1">
+    </ul>
+    <b>Retrieved URLs</b>
+    <ul>
+      <li id="greeting2"></li>
+      <li id="greeting3"></li>
+      <li id="greeting4"></li>
       
     </ul>
-    <br>
-    <p2 id="greeting2"></p2>
-    <br>
-    <p3 id="greeting3"></p3>
-    <br>
-    <p4 id="greeting4"></p4>
-    <br>
     <script src="Updatedata.js"></script>
     <script src="login.js"></script>
     <script src="startstream.js"></script>
-    
+
   </div>
-  </body>
+</body>
+
 </html>
