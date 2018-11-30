@@ -47,9 +47,8 @@ document.getElementById("login").onclick = function()
     .done(function(data, textStatus, jqXHR) 
     {
         console.log("auth/login HTTP Request Succeeded: " + jqXHR.status);
-        token = (JSON.stringify(data));
-        document.querySelector('#token_input').value = token;
-        document.querySelector('#greeting1').innerText = 'Connection Success!  '+token; 
+        document.querySelector('#token_input').value = data.token;
+        document.querySelector('#greeting1').innerText = 'Connection Success!  '+data.token; 
         startHeartbeat();
     }).fail(function(jqXHR, textStatus, errorThrown) 
     {
@@ -70,7 +69,9 @@ function startHeartbeat()
                 },
                 type: "POST",
                 contentType:"application/json",
-                data:token
+                data:JSON.stringify({
+                    "token": token
+                })
             }).done(function(data, textStatus, jqXHR) 
             {
                 //  console.log("HTTP HTBEAT Request Succeeded: " + jqXHR.status);

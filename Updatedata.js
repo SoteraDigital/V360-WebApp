@@ -159,7 +159,7 @@ class CameraInfo
 		log('Getting Camera services');
 		reverseTetheringButton.hidden = false;
 		try{
-			await getData(this.apq_services,"usb mode mode",0xff0b,true);
+			await getData(this.apq_services,"usb mode",0xff0b,true);
 		}catch(e)
 		{
 			log("cannot read usb mode:"+ e);
@@ -332,7 +332,7 @@ document.getElementById("bluetoothStartScan").onclick = async function()
 			log("exception getting device information:" + e);
 		}
 
-		const db_service = await getFF70_Service(server);
+		const db_service = await server.getPrimaryService('f000ff70-0123-4000-b000-000000000000');
 		if(!db_service)
 		{
 			return;

@@ -2,6 +2,7 @@
 document.getElementById("start").onclick = function()
 {
     updateValues();
+    token = document.querySelector('#token_input').value;
     //CONFIGURE CALL  
     $.ajax({
         url: proxy_url_port+"/streaming/CONFIG",
@@ -11,7 +12,7 @@ document.getElementById("start").onclick = function()
         type: "POST",
         contentType:"application/json",
         data:JSON.stringify({
-            "token": token.substring(10, 22),
+            "token": token,
             "mode": "1",
             "path": ""
         })
@@ -46,7 +47,7 @@ document.getElementById("start").onclick = function()
         type: "POST",
         contentType:"application/json",
         data:JSON.stringify({
-            "token": token.substring(10,22),
+            "token": token,
             "stream": "TRUE"
         })
     })
