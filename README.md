@@ -1,4 +1,4 @@
-# V360-ChromeApp
+# V360-WebApp
 added a node.js application (server.js) which will start two web servers.
 
 "http://localhost:8059"
