@@ -40,7 +40,26 @@
           <b>Step 2: Connect to the camera main Processor bluetooth </b>
         </li>
         <li>
-          <input id="bluetoothCameraStartScan" type="submit" value="Connect to the Camera Main processor"><input hidden="hidden" id="reverseTethering" type="submit" value="switch to reverse tethering">
+          <input id="bluetoothCameraStartScan" type="submit" value="Connect using BT to the Camera Main processor">
+          <input id="bluetoothRefreshInfo" type="submit" value="Refresh Camera information">
+          <br>
+          <input  id="reverseTethering" type="submit" value="switch USB Mode">
+          <br>
+          <input hidden="hidden" id="reverseTethering" type="submit" value="switch USB Mode">
+          <select id="usb_mode_value">
+            <option value="0">USB Charging Only(0x00)</option>
+            <option default value="1">USB Mass Storage(0x01)</option>
+            <option value="2">USB Reverse Tethering(0x02)</option>
+          </select>
+          <br>
+          
+          <p>this requires already adding your wifi information using the mobile app for now</p>
+          <select id="wifi_mode_value">
+            <option value="0">No Wifi(0x0)</option>
+            <option default value="1">Become a WIFI access point(0x01)</option>
+            <option value="2">Connect to a WIFI network already saved to camera(0x02)</option>
+          </select>
+          <input id="wifi_mode_button" type="submit" value="switch WIFI Mode">
         </li>
         <li>
           <b>Step 3:Connect to the camera WIFI / network access point</b>
@@ -51,10 +70,10 @@
           <b>Step 4:(if required)</b><br>
           Submit only if a change is required:
           <div>
-            Camera IP Address default when the camera acts as as accesspoint is 192.168.0.1:
-            <input id="webaddress" type="text" name="webaddress" value="192.168.0.1"><br>
+            Camera IP Address default when the camera acts as as accesspoint is :
+            <input id="webaddress" type="text" name="webaddress" placeholder="192.168.0.1" value="192.168.0.1"><br>
             Camera Pin(defaults is 0000):
-            <input id="camerapin" type="text" name="camerapin" value="0000">
+            <input id="camerapin" type="text" name="camerapin" placeholder="0000" value="0000">
            
           </div>
         </li>

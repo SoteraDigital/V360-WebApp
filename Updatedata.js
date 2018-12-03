@@ -1,6 +1,11 @@
 
 var greeting1 = document.querySelector('#greeting1');
 var reverseTetheringButton = document.getElementById("reverseTethering");
+var usb_mode_value_dropdown = document.getElementById("usb_mode_value");
+var refresh_bluetooth_info_button = document.getElementById('bluetoothRefreshInfo');
+var wifi_mode_Button = document.getElementById("wifi_mode_button");
+var wifi_mode_value = document.getElementById("wifi_mode_value");
+
 var bluetoothDaugtherBoardDevice;
 const decoder = new TextDecoder('UTF-8');
 function log(msg)
@@ -154,12 +159,20 @@ class CameraInfo
 		log('Logging in to Camera');
 		await loginApq(db_service,"0000");
 	}
+	async RetrieveCameraIpAddress()
+	{
+		let wifi_info_data = await getData(this.apq_services,"current wifi info",0xff42,false);
+		let wifi_info = createCurrentWifiInformationStruct(wifi_info_data);
+		document.getElementById("webaddress").value = wifi_info["ipaddress"];
+		logData("current wifi info",wifi_info);
+	}
 	async RetrieveData()
 	{
 		log('Getting Camera services');
 		reverseTetheringButton.hidden = false;
 		try{
-			await getData(this.apq_services,"usb mode",0xff0b,true);
+			var read_usb_mode = await getData(this.apq_services,"usb mode",0xff0b,false);
+			usb_mode_value_dropdown.value = read_usb_mode.getUint8(0);
 		}catch(e)
 		{
 			log("cannot read usb mode:"+ e);
@@ -167,22 +180,21 @@ class CameraInfo
 		//
 		await getData(this.db_service,"camera capture mode",0xff80,true);
 		
-		let camera_info_data = await getData(this.apq_services,"camera information",0xff43,true);
+		let camera_info_data = await getData(this.apq_services,"camera information",0xff43,false);
 		let camera_info = createCameraInformationStruct(camera_info_data);
 		logData("Camera information",camera_info);
 
 		let camera_name = await getData(this.apq_services,"camera name",0xff06,false);
-		log("Camera Name"+decoder.decode(camera_name));
+		log("Camera Name: "+decoder.decode(camera_name));
 		
-		let wifi_info_data = await getData(this.apq_services,"current wifi info",0xff42,false);
-		let wifi_info = createCurrentWifiInformationStruct(wifi_info_data);
-		document.getElementById("webaddress").value = wifi_info["ipaddress"];
-		logData("current wifi info",wifi_info);
+		await this.RetrieveCameraIpAddress();
 		
 		let wifi_config_data = await getData(this.apq_services,"wifi config",0xff30,false);
 		let wifi_config = createCurrentWifiConfigurationStruct(wifi_config_data);
-		logData("wifi config",wifi_config);
+		wifi_mode_value.value = wifi_config;
 		
+		//logData("wifi config",wifi_config);
+		//show wifi settings on a text field on the right side including dropdown to save them.
 		let ap_config_data = await getData(this.apq_services,"access point config",0xff31,false);
 		let ap_config = createApConfigurationStruct(ap_config_data);
 		logData("access point config",ap_config);
@@ -191,11 +203,29 @@ class CameraInfo
 	{
 		await writeData(this.apq_services,"usb mode",0xff0b,Uint8Array.of(value));
 	}
+	async wifi_config(value)
+	{
+		await writeData(this.apq_services,"wifi mode",0xff30,Uint8Array.of(value));
+	}
+}
+refresh_bluetooth_info_button.onclick = async function()
+{
+	await camera_connection.RetrieveCameraIpAddress();
 }
 reverseTetheringButton.onclick = async function()
 {
-	camera_connection.usb_tethering(0x2);
+	var value = usb_mode_value_dropdown.options[usb_mode_value_dropdown.selectedIndex].value
+	reverseTetheringButton.disabled = true;
+	await camera_connection.usb_tethering(parseInt(value));
+	reverseTetheringButton.disabled = true;
 };
+wifi_mode_Button.onclick = async function()
+{
+	var value = wifi_mode_value.options[wifi_mode_value.selectedIndex].value
+	wifi_mode_Button.disabled = true;
+	await camera_connection.wifi_config(parseInt(value));
+	wifi_mode_Button.disabled = true;
+}
 var camera_connection = null;
 
 document.getElementById("bluetoothCameraStartScan").onclick = async function()
@@ -256,7 +286,8 @@ function createApConfigurationStruct(dataview)
 }
 function createCurrentWifiConfigurationStruct(dataview)
 {
-	let buffer = dataview.buffer;
+	return dataview.getUint8(0);
+	/*let buffer = dataview.buffer;
 	let type_str = "";
 	switch(dataview.getUint8(0))
 	{
@@ -275,7 +306,7 @@ function createCurrentWifiConfigurationStruct(dataview)
 	let tmp = {
 		"wifi-connection-type":type_str
 	};
-
+*/
 	return tmp;
 }
 function createCurrentWifiInformationStruct(dataview)

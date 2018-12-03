@@ -52,7 +52,7 @@ document.getElementById("login").onclick = function()
         startHeartbeat();
     }).fail(function(jqXHR, textStatus, errorThrown) 
     {
-        log('auth/login Connection Failed, Plase Make Sure Computer is on Camera WiFi and Try Again');
+        log('/auth/login Connection Failed httpCode: '+errorThrown+' Status:'+textStatus);
     });
 };
 function startHeartbeat()
