@@ -1,3 +1,40 @@
+//http://cameraip:port/operation/RECORD
+document.getElementById("startRecord").onclick = function()
+{
+    var config_data = {
+        "record": true
+    };
+    sendRecordRequest(config_data);
+};
+document.getElementById("stopRecord").onclick = function()
+{
+    var config_data = {
+        "record": false
+    };
+    sendRecordRequest(config_data);
+};
+function sendRecordRequest(arg_data)
+{
+    updateValues();
+    token = document.querySelector('#token_input').value;
+    var merged = Object.assign({},arg_data,{"token":token})
+    $.ajax({
+        url: proxy_url_port+"/operation/RECORD",
+        headers:{
+            'Target-Proxy':"http://"+document.getElementById("webaddress").value
+        },
+        type: "POST",
+        contentType:"application/json",
+        data:JSON.stringify(merged)
+    })
+    .done(function(data, textStatus, jqXHR) {
+        console.log("HTTP Record Request Succeeded: " + jqXHR.status);
+        log("Changed Recording:" + JSON.stringify(arg_data));
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+       log("config HTTP Request Failed code:"+jqXHR.status+" Status:"+errorThrown);
+    });
+}
 // My API (POST http://192.168.0.1:8888/streaming/CONFIG)
 document.getElementById("start").onclick = function()
 {
