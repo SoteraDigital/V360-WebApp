@@ -41,16 +41,17 @@
         </li>
         <li>
           <input id="bluetoothCameraStartScan" type="submit" value="Connect using BT to the Camera Main processor">
-          <input id="bluetoothRefreshInfo" type="submit" value="Refresh Camera information">
+          <input disabled id="bluetoothRefreshInfo" type="submit" value="Refresh Camera information">
           <br>
           
           <br>
-          <input hidden="hidden" id="reverseTethering" type="submit" value="switch USB Mode"><input  id="reverseTethering" type="submit" value="switch USB Mode">
           <select id="usb_mode_value">
             <option value="0">USB Charging Only(0x00)</option>
             <option default value="1">USB Mass Storage(0x01)</option>
             <option value="2">USB Reverse Tethering(0x02)</option>
           </select>
+          <input disabled id="reverseTethering" type="submit" value="switch USB Mode">
+         
           <br>
           
           <p>this requires already adding your wifi information using the mobile app for now</p>
@@ -59,7 +60,7 @@
             <option default value="1">Become a WIFI access point(0x01)</option>
             <option value="2">Connect to a WIFI network already saved to camera(0x02)</option>
           </select>
-          <input id="wifi_mode_button" type="submit" value="switch WIFI Mode">
+          <input disabled id="wifi_mode_button" type="submit" value="switch WIFI Mode">
         </li>
         <li>
           <b>Step 3:Connect to the camera WIFI / network access point</b>

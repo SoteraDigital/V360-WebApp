@@ -51,6 +51,12 @@ function handleNotifications(event)
 		}
 	}
 }
+function resetButtons()
+{
+	wifi_mode_Button.disabled = true;
+	refresh_bluetooth_info_button.disabled = true;
+	reverseTetheringButton.disabled = true;
+}
 var SCAM1_service_uuid = 0xff00;
 var SCAM2_service_uuid = 0xff70;
 var SCAM_2_WIFIINF_uuid = '0000ff79-0000-1000-8000-00805f9b34fb';
@@ -58,6 +64,7 @@ function onDisconnected(event)
 {
 	// Object event.target is Bluetooth Device getting disconnected.
 	log(' Bluetooth Device disconnected');
+	resetButtons();
 }
 async function displayDeviceInformation(server)
 {
@@ -169,7 +176,9 @@ class CameraInfo
 	async RetrieveData()
 	{
 		log('Getting Camera services');
-		reverseTetheringButton.hidden = false;
+		reverseTetheringButton.disabled = false;
+		bluetoothRefreshInfo.disabled = false;
+		wifi_mode_Button.disabled = false;
 		try{
 			var read_usb_mode = await getData(this.apq_services,"usb mode",0xff0b,false);
 			usb_mode_value_dropdown.value = read_usb_mode.getUint8(0);
@@ -210,21 +219,23 @@ class CameraInfo
 }
 refresh_bluetooth_info_button.onclick = async function()
 {
+	refresh_bluetooth_info_button.disabled =true;
 	await camera_connection.RetrieveCameraIpAddress();
+	refresh_bluetooth_info_button.disabled =false;
 }
 reverseTetheringButton.onclick = async function()
 {
 	var value = usb_mode_value_dropdown.options[usb_mode_value_dropdown.selectedIndex].value
 	reverseTetheringButton.disabled = true;
 	await camera_connection.usb_tethering(parseInt(value));
-	reverseTetheringButton.disabled = true;
+	reverseTetheringButton.disabled = false;
 };
 wifi_mode_Button.onclick = async function()
 {
 	var value = wifi_mode_value.options[wifi_mode_value.selectedIndex].value
 	wifi_mode_Button.disabled = true;
 	await camera_connection.wifi_config(parseInt(value));
-	wifi_mode_Button.disabled = true;
+	wifi_mode_Button.disabled = false;
 }
 var camera_connection = null;
 
@@ -250,7 +261,7 @@ document.getElementById("bluetoothCameraStartScan").onclick = async function()
 				]
 			});
 			bluetoothCameraStartScan.addEventListener('gattserverdisconnected', onDisconnected);
-			log("found a Camera device:"+bluetoothCameraStartScan);
+			log("found a Camera device:"+JSON.stringify(bluetoothCameraStartScan));
 			const server = await bluetoothCameraStartScan.gatt.connect();
 			
 			db_service = await server.getPrimaryService(0xff70);
