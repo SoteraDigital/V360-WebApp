@@ -14,7 +14,8 @@ Right now for this to work you must have:
 * Following network ports free:
   * tcp/8059
   * tcp/8053
-  
+  * if the ports are blocked they can be change on [server.js](server.js) and [setvars.js](setvars.js)
+  * if you are having troubel changing them open a github Issue and we will add a method to specify the network port
 Once installed execute in a command prompt or console terminal the following inside of this directory
 ```
 node server.js
@@ -26,10 +27,15 @@ This will start two web servers using the following TCP network ports:
 ## Usage
 Once the webserver is started you can open a web browser pointing to http://localhost:8059
 This website will guide you by the steps needed to obtain a video streaming URL. 
+After you complete all steps and press start streaming you will receive the network URL's required to open the video on 
+* [Quicktime Windows or Mac](https://support.apple.com/kb/DL837?locale=en_US) (File -> Open Location)
+* [VLC](https://www.videolan.org/index.html)
+* mplayer
+* ffmpeg
 
-The http://localhost:8503 is a http proxy used to forward network request to the camera while bypassing CORS restrictions on web browsers.
+### 8503 port usage
+The http://localhost:8053 is a http proxy used to forward network request to the camera while bypassing CORS restrictions on web browsers.
 
-If ports require changes they can be updated on servers.js and setvars.js
 ## Known Issues:
 * Login Token not saved 
   * If you obtain a logging token (In step 5) and refresh the website it will be erased upon refresh. This will cause the camera to deny any further login request until you restart it completely. 
