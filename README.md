@@ -6,7 +6,7 @@ Right now the supported functionality is:
   * Charging only
   * Mass Storage (Access to SD Card)
   * Reverse Tethering (Access camera network via USB) (see instructions below)
-
+# Bluetooth and HTTP Protocol/specification is availabe under [docs folder](docs/)
 ## Requirements:
 Right now for this to work you must have:
 * [Node.js installed](https://nodejs.org/en/download/)
