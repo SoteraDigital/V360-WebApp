@@ -6,39 +6,10 @@ This is a simple java application that presents a GUI for running ffmpeg with di
 Based on the input video resolution/size and the output format selected by the user we run a few task:
 
 * unstack the video and place side by side.
-* downscale to a lower resolution
+* downscale to a lower resolution if user selects mobile resolution
 * add meta data to upload to youtube or facebook.
 
-TODO: update later with the ffmpeg commands.
-
-# Video Convrter Commands
-
-## Get file info command
-This is used to retrieve video resolution and other properties this are needed for the commands that follow since the filters change depending on the input video resolution.
-
-```
-ffmpeg -i video_filename.mp4
-```
-
-## Capturing a frame from the video to generate a thumbnail
-
-### If video resolution is: 3240 x 2160
-```
-ffmpeg -ss 00:00:5 -i video_filename.mp4 -filter_complex 'scale=300:200 [scaledDown]; [scaledDown] split [scaledDown1] [scaledDown2]; [scaledDown1] crop=300:100:0:0 [upper]; [scaledDown2] crop=300:100:0:100 [lower]; [upper] pad=600:100:0:0 [step1]; [step1][lower] overlay=300:0' -frames:v 1 -y thumbnail.jpg
-```
-
-### If video resolution is 3840 x 2160
-```
-ffmpeg -ss 00:00:5 -i video_filename.mp4 -filter_complex 'crop=3240:2160:300:0 [cropped]; [cropped] scale=300:200   [scaledDown]; [scaledDown] split [scaledDown1] [scaledDown2]; [scaledDown1] crop=300:100:0:0 [upper]; [scaledDown2] crop=300:100:0:100 [lower]; [upper] pad=600:100:0:0 [step1]; [step1][lower] overlay=300:0' -frames:v 1 -y thumbnail.jpg
-```
-### All other resolutions:
-```
-ffmpeg -ss 00:00:5 -i video_filename.mp4 scale=600:100 -frames:v 1 -y thumbnail.jpg
-```
-Invert a thumbnail
-```
-ffmpeg -i video_filename.mp4 -vf rotate=PI -y rotated_thumbnail.jpg
-```
+# Video Converter Commands
 
 ## Convert video to mobile friendly resolutions (1620 x 1080 or 1920 x 320)
 This takes a video and reduces it to either 1620 x 1080 or 1920 x 320 depending on the input video resolution
@@ -109,6 +80,32 @@ ffmpeg -i video_filename.mp4 -loop -1 -i v360grid.png -shortest -filter_complex 
 ### all other resolutions to 6480x2852
 ```
 ffmpeg -i video_filename.mp4 -loop -1 -i v360grid.png -shortest -filter_complex 'split [scaledDown1] [scaledDown2]; [scaledDown1] crop=3240:1080:0:0 [upper]; [scaledDown2] crop=3240:1080:0:1080 [lower]; [upper] pad=6480:1080:0:0 [step1]; [step1][lower] overlay=3240:0 [letterbox]; [1:0][letterbox] overlay=0:886:shortest=1' -y unstacked_video_filename.mp4
+```
+## Get file info command
+This is used to retrieve video resolution and other properties this are needed for the commands that follow since the filters change depending on the input video resolution.
+
+```
+ffmpeg -i video_filename.mp4
+```
+
+## Capturing a frame from the video to generate a thumbnail
+
+### If video resolution is: 3240 x 2160
+```
+ffmpeg -ss 00:00:5 -i video_filename.mp4 -filter_complex 'scale=300:200 [scaledDown]; [scaledDown] split [scaledDown1] [scaledDown2]; [scaledDown1] crop=300:100:0:0 [upper]; [scaledDown2] crop=300:100:0:100 [lower]; [upper] pad=600:100:0:0 [step1]; [step1][lower] overlay=300:0' -frames:v 1 -y thumbnail.jpg
+```
+
+### If video resolution is 3840 x 2160
+```
+ffmpeg -ss 00:00:5 -i video_filename.mp4 -filter_complex 'crop=3240:2160:300:0 [cropped]; [cropped] scale=300:200   [scaledDown]; [scaledDown] split [scaledDown1] [scaledDown2]; [scaledDown1] crop=300:100:0:0 [upper]; [scaledDown2] crop=300:100:0:100 [lower]; [upper] pad=600:100:0:0 [step1]; [step1][lower] overlay=300:0' -frames:v 1 -y thumbnail.jpg
+```
+### All other resolutions:
+```
+ffmpeg -ss 00:00:5 -i video_filename.mp4 scale=600:100 -frames:v 1 -y thumbnail.jpg
+```
+Invert a thumbnail
+```
+ffmpeg -i video_filename.mp4 -vf rotate=PI -y rotated_thumbnail.jpg
 ```
 
 # Spherical Metadata
