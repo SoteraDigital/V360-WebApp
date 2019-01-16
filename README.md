@@ -42,3 +42,20 @@ The http://localhost:8053 is a http proxy used to forward network request to the
   Workaround for now is to copy and paste the token after logging in and paste it back in if you have to refresh the website.
 * IP Address obtained from the camera will be incorrect if you are using reverse tethering USB mode.
   * If you have USB set to reverse tethering access adb shell netcfg to obtain the IP address of the camera.
+
+## adb tips & tricks
+* open real home screen
+```
+adb shell am home 
+```
+* Execute commands directly thru adb instead of using bluetooth or WIFI
+TODO need to upload a list of all the different command_key
+```
+adb shell am broadcast -a com.android.mycamera.command -e command_key "take_picture"
+```
+* Verbose control engine logs can be enabled with adb to be printed to logcat
+```
+adb shell setprop persist.sys.celog.level 0 
+adb shell am restart com.hip.dragonfly.controlengine
+adb shell am restart org.mortbay.ijetty
+```
