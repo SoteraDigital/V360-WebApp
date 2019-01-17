@@ -7,7 +7,7 @@ Right now the supported functionality is:
   * Mass Storage (Access to SD Card)
   * Reverse Tethering (Access camera network via USB) (see instructions below)
 # Bluetooth and HTTP Protocol/specification is availabe under [docs folder](docs/)
-# How to convert videos to unstack them and downsize them same way as our converter: [V360 VideoConversion Guide](V360-VideoConversion Guide.md)
+# How to convert videos to unstack them and downsize them same way as our converter: [V360 VideoConversion Guide](./V360-VideoConversion Guide.md)
 ## Requirements:
 Right now for this to work you must have:
 * [Node.js installed](https://nodejs.org/en/download/)
